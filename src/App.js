@@ -1,21 +1,19 @@
+import Navbar from "./components/navbar/Navbar";
+import Home from "./components/home/Home";
 import "./App.css";
 
 function App() {
-  const title = "Welcome to Simple Code Technologies";
-
-  const details = {
-    students: 50,
-    address: "Freetown",
-    founder: "Alpha Alimamy Kamara",
-  };
   return (
     <div className="App">
+      {/* Navbar */}
+      <Navbar />
+
       <div className="content">
-        <h1>{title}</h1>
-        <p>The Institution has {details.students} students</p>
-        <p>Address: {details.address}</p>
-        <p>Founder: {details.founder}</p>
+        <h1>App Component</h1>
       </div>
+
+      {/* Home Component */}
+      <Home />
     </div>
   );
 }
