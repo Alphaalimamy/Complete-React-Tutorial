@@ -1,9 +1,9 @@
 .link {
-  display: inline-block;
-  margin-bottom: 10px;
+  display: flex;
+  justify-content: flex-end;
 }
 a {
-  padding: 20px;
   text-decoration: none;
   font-size: 1.5rem;
+  margin-left: 10px;
 }
