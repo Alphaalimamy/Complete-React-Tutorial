@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import BlogList from "../blogList/BlogList";
+
 import "./home.css";
 
 export default function Home() {
@@ -33,9 +34,7 @@ export default function Home() {
   };
   const [name, setName] = useState("Alpha");
 
-  useEffect(() => {
-    console.log("Use Effect runs...");
-  }, [name]);
+  useEffect(() => {}, [name]);
   return (
     <div className="home">
       <BlogList blogs={blogs} title="All Blogs" handleDelete={handleDelete} />
