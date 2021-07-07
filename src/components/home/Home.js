@@ -1,45 +1,32 @@
 import React from "react";
+import axios from "axios";
 import { useState, useEffect } from "react";
 import BlogList from "../blogList/BlogList";
 
 import "./home.css";
 
 export default function Home() {
-  const [blogs, setBlogs] = useState([
-    {
-      id: 1,
-      title: "My new website",
-      body: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi, perspiciatis!",
-      author: "Alpha",
-    },
+  const [blogs, setBlogs] = useState(null);
 
-    {
-      id: 2,
-      title: "Welcome party",
-      body: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi, perspiciatis!",
-      author: "Monarchy",
-    },
+  // const handleDelete = (id) => {
+  //   const newBlogs = blogs.filter((blog) => blog.id !== id);
+  //   setBlogs(newBlogs);
+  // };
 
-    {
-      id: 3,
-      title: "Web dev top tips",
-      body: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi, perspiciatis!",
-      author: "Alpha",
-    },
-  ]);
+  useEffect(() => {
+    fetch("http://localhost:8000/blogs")
+      .then((response) => response.json())
+      .then((data) => setBlogs(data));
+  });
+  // const fetchData = async () => {
+  //   const res = await axios.get("http://localhost:8000/blogs");
+  //   setBlogs(res.data);
+  // };
 
-  const handleDelete = (id) => {
-    const newBlogs = blogs.filter((blog) => blog.id !== id);
-    setBlogs(newBlogs);
-  };
-  const [name, setName] = useState("Alpha");
-
-  useEffect(() => {}, [name]);
+  // fetchData();
   return (
     <div className="home">
-      <BlogList blogs={blogs} title="All Blogs" handleDelete={handleDelete} />
-      <button onClick={() => setName("Rugiatu")}>Change name</button>
-      <p>{name}</p>
+      {blogs && <BlogList blogs={blogs} title="All Blogs" />}
     </div>
   );
 }
