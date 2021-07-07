@@ -6,7 +6,9 @@ const useFetch = (uri) => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch(uri)
+    // Abort Controller
+    const abortController = new AbortController();
+    fetch(uri, { signal: abortController.signal })
       .then((res) => {
         if (!res.ok) {
           throw new Error("Could not fetch the data for that resource");
@@ -19,9 +21,15 @@ const useFetch = (uri) => {
         setError(null);
       })
       .catch((err) => {
-        setISPending(false);
-        setError(err.message);
+        if (err.name === "AbortError") {
+          console.log("Fetch abort");
+        } else {
+          setISPending(false);
+          setError(err.message);
+        }
       });
+
+    return () => abortController.abort();
   }, [uri]);
 
   return {
