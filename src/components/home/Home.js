@@ -31,13 +31,16 @@ export default function Home() {
     const newBlogs = blogs.filter((blog) => blog.id !== id);
     setBlogs(newBlogs);
   };
+  const [name, setName] = useState("Alpha");
 
   useEffect(() => {
     console.log("Use Effect runs...");
-  });
+  }, [name]);
   return (
     <div className="home">
       <BlogList blogs={blogs} title="All Blogs" handleDelete={handleDelete} />
+      <button onClick={() => setName("Rugiatu")}>Change name</button>
+      <p>{name}</p>
     </div>
   );
 }
